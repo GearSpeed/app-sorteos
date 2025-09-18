@@ -7,7 +7,39 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@master/*": ["../{{ CHILD_PROJECT_NAME }}/src/*"],
+
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@libs/*": [
+        "src/libs/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ]
     },
 
     /* Bundler mode */
