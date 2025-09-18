@@ -1,7 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-
 export default function TiktokFormPage() {
-  const nav = useNavigate();
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-gray-800">
@@ -9,7 +6,7 @@ export default function TiktokFormPage() {
 
       <div className="flex gap-6">
         <h1>
-            Próximamenta TikTok
+            Próximamente TikTok
         </h1>
       </div>
     </main>
