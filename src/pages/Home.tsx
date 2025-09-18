@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Home() {
   const nav = useNavigate();
   const [input, setInput] = useState('');
+  const [hashtag, setHashtag] = useState('');
 
   // acepta "dQw4w9WgXcQ" o "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   const extractId = (url: string) =>
@@ -13,7 +14,12 @@ export default function Home() {
     e.preventDefault();
     const id = extractId(input.trim());
     if (!id) return alert('ID o URL inválida');
-    nav(`/comments?v=${id}`);
+    
+    const params = new URLSearchParams({ v: id });
+    if (hashtag.trim()) {
+      params.set('hashtag', hashtag.trim());
+    }
+    nav(`/comments?${params.toString()}`);
   };
 
   return (
@@ -25,6 +31,13 @@ export default function Home() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          className="w-full border rounded px-3 py-2 mb-4"
+        />
+        <label className="block mb-2 text-sm text-gray-700">Hashtag para filtrar (opcional):</label>
+        <input
+          value={hashtag}
+          onChange={(e) => setHashtag(e.target.value)}
+          placeholder="#hashtag o hashtag"
           className="w-full border rounded px-3 py-2 mb-4"
         />
         <button

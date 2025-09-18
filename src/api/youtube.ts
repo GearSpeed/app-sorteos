@@ -9,7 +9,29 @@ export interface YTComment {
   likeCount: number;
 }
 
-export async function getComments(videoId: string): Promise<YTComment[]> {
+const normalizeHashtag = (hashtag: string): string => {
+  return hashtag.replace(/^#/, '').toLowerCase();
+};
+
+const getUniqueCommentsByUser = (comments: YTComment[]): YTComment[] => {
+  const userComments = new Map<string, YTComment>();
+  
+  comments.forEach(comment => {
+    const normalizedAuthor = comment.author
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, ' ');
+    
+    const existing = userComments.get(normalizedAuthor);
+    if (!existing || comment.likeCount > existing.likeCount) {
+      userComments.set(normalizedAuthor, comment);
+    }
+  });
+  
+  return Array.from(userComments.values());
+};
+
+export async function getComments(videoId: string, hashtag?: string): Promise<YTComment[]> {
   const parts = 'snippet';
   let pageToken = '';
   const all: YTComment[] = [];
@@ -24,9 +46,11 @@ export async function getComments(videoId: string): Promise<YTComment[]> {
     });
     const res = await fetch(`${BASE}/commentThreads?${qs}`);
     if (!res.ok) throw new Error('YouTube API error ' + res.status);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const j: any = await res.json();
 
     if (!j.items) break;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     j.items.forEach((t: any) => {
       const top = t.snippet.topLevelComment.snippet;
       all.push({
@@ -39,5 +63,17 @@ export async function getComments(videoId: string): Promise<YTComment[]> {
     });
     pageToken = j.nextPageToken || '';
   } while (pageToken);
-  return all;
+
+  let filteredComments = all;
+
+  if (hashtag && hashtag.trim()) {
+    const normalizedHashtag = normalizeHashtag(hashtag.trim());
+    filteredComments = all.filter(comment => {
+      const text = comment.text.toLowerCase();
+
+      return text.includes(`#${normalizedHashtag}`) || text.includes(normalizedHashtag);
+    });
+  }
+
+  return getUniqueCommentsByUser(filteredComments);
 }
