@@ -1,16 +1,11 @@
-import './App.css'
+import { Outlet } from 'react-router-dom';
 
 function App() {
-
   return (
-    <>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <h1 className="text-3xl font-bold underline text-cyan-500">
-          Hello Tailwind!
-        </h1>
-      </div>
-    </>
-  )
+    <main className="min-h-screen bg-gray-100">
+      <Outlet />          {/* ← aquí se pintan las rutas hijas */}
+    </main>
+  );
 }
 
-export default App
+export default App;
