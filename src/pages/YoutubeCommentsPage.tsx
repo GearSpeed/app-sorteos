@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { CommentsList } from '../features/youtube-comments';
+import { CommentsList } from '@features/youtube-comments';
 
 export default function YoutubeCommentsPage() {
   const [params] = useSearchParams();

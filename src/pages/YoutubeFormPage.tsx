@@ -23,30 +23,36 @@ export default function YoutubeFormPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-4">App Sorteos</h1>
-        <label className="block mb-2 text-sm text-gray-700">Pega el link o ID del video:</label>
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          className="w-full border rounded px-3 py-2 mb-4"
-        />
-        <label className="block mb-2 text-sm text-gray-700">Hashtag para filtrar (opcional):</label>
-        <input
-          value={hashtag}
-          onChange={(e) => setHashtag(e.target.value)}
-          placeholder="#hashtag o hashtag"
-          className="w-full border rounded px-3 py-2 mb-4"
-        />
+    <div className="min-h-screen flex flex-col gap-4 items-center justify-center bg-gray-50">
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
+            <h1 className="text-2xl font-bold mb-4">App Sorteos</h1>
+            <label className="block mb-2 text-sm text-gray-700">Pega el link o ID del video:</label>
+            <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                className="w-full border rounded px-3 py-2 mb-4"
+            />
+            <label className="block mb-2 text-sm text-gray-700">Hashtag para filtrar (opcional):</label>
+            <input
+                value={hashtag}
+                onChange={(e) => setHashtag(e.target.value)}
+                placeholder="#hashtag o hashtag"
+                className="w-full border rounded px-3 py-2 mb-4"
+            />
+            <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            >
+                Ver comentarios
+            </button>
+        </form>
         <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            onClick={() => nav('/')}
+            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition"
         >
-          Ver comentarios
+            Volver
         </button>
-      </form>
     </div>
   );
 }

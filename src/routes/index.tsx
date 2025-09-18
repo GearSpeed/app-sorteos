@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import Home from '../pages/Home';
-import YoutubeCommentsPage from '../pages/YoutubeCommentsPage';
-import YoutubeFormPage from '../pages/YoutubeFormPage'
-import TiktokFormPage from '../pages/TiktokFormPage'
-import NotFound from '../pages/NotFound';
+import Home from '@pages/Home';
+import YoutubeCommentsPage from '@pages/YoutubeCommentsPage';
+import YoutubeFormPage from '@pages/YoutubeFormPage'
+import TiktokFormPage from '@pages/TiktokFormPage'
+import NotFound from '@pages/404';
 
 export const router = createBrowserRouter([
   {
