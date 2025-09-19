@@ -5,6 +5,7 @@ export default function YoutubeCommentsPage() {
   const [params] = useSearchParams();
   const videoId = params.get('v') ?? '';
   const hashtag = params.get('hashtag') ?? '';
+  const attempts = parseInt(params.get('attempts') ?? '3');
 
   return (
     <section className="max-w-4xl mx-auto p-6">
@@ -14,7 +15,7 @@ export default function YoutubeCommentsPage() {
           Filtrando por: <span className="font-semibold">#{hashtag.replace(/^#/, '')}</span>
         </p>
       )}
-      <CommentsList videoId={videoId} hashtag={hashtag} />
+      <CommentsList videoId={videoId} hashtag={hashtag} attempts={attempts} />
     </section>
   );
 }
