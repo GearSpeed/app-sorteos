@@ -10,6 +10,9 @@
       "@/*": ["src/*"],
       "@master/*": ["../{{ CHILD_PROJECT_NAME }}/src/*"],
 
+      "@api/*": [
+        "src/api/*"
+      ],
       "@assets/*": [
         "src/assets/*"
       ],

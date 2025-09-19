@@ -5,6 +5,8 @@ export default function YoutubeFormPage() {
   const nav = useNavigate();
   const [input, setInput] = useState('');
   const [hashtag, setHashtag] = useState('');
+  const [attempts, setAttempts] = useState(3);
+  const [inputValue, setInputValue] = useState('3');
 
   // acepta "dQw4w9WgXcQ" o "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   const extractId = (url: string) =>
@@ -19,6 +21,7 @@ export default function YoutubeFormPage() {
     if (hashtag.trim()) {
       params.set('hashtag', hashtag.trim());
     }
+    params.set('attempts', attempts.toString());
     nav(`/comments?${params.toString()}`);
   };
 
@@ -38,6 +41,28 @@ export default function YoutubeFormPage() {
                 value={hashtag}
                 onChange={(e) => setHashtag(e.target.value)}
                 placeholder="#hashtag o hashtag"
+                className="w-full border rounded px-3 py-2 mb-4"
+            />
+            <label className="block mb-2 text-sm text-gray-700">Número de intentos para eliminar:</label>
+            <input
+                type="number"
+                min="1"
+                max="10"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  const numValue = parseInt(e.target.value);
+                  if (!isNaN(numValue)) {
+                    setAttempts(numValue);
+                  }
+                }}
+                onBlur={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (isNaN(value) || value < 2) {
+                    setAttempts(3);
+                    setInputValue('3');
+                  }
+                }}
                 className="w-full border rounded px-3 py-2 mb-4"
             />
             <button
